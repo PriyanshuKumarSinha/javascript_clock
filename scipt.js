@@ -1,46 +1,41 @@
 var canvas = document.querySelector('canvas');
 canvas.width = window.innerWidth ;
-canvas.height = window.innerHeight/2;
+canvas.height = window.innerHeight;
 var c = canvas.getContext('2d');
 
 
 
-var radius = canvas.height/2.1;
-var radius2 = radius -12;
+var radius = canvas.height/4;
+var radius2 = radius -25;
     
 var x = canvas.width/2;
-var y = canvas.height/2;
+var y = canvas.height/4+100;
 
 
 window.addEventListener('resize', 
     function(){
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight/2;
     x = canvas.width/2;
-    y = canvas.height/2;
     c.clearRect(0,0,innerWidth, innerHeight)
-    myFunction()
+    
     }
 )
 
-myFunction();
-function myFunction() {
-  document.querySelector(".clock-bg").style.height = `${innerHeight/2.5}px`;
-  document.querySelector(".clock-bg").style.width = `${innerWidth}px`;
-
-}
-
 class Circle{
-    constructor(radius2, strokeStyles, fillStyles){
+    constructor(radius2, strokeStyles, fillStyles, lineWidth){
         this.radius = radius2;
         this.strokeStyle = strokeStyles;
         this.fillStyle = fillStyles;
+        this.lineWidth = lineWidth;
+
     }
     draw(){
         c.beginPath();
         c.arc(x, y, this.radius, 0, Math.PI*2, false);
-        // c.strokeStyle = this.strokeStyle;
+        c.shadowBlur = 10;
+        c.shadowColor = "#3b3b3b";
         c.fillStyle = this.fillStyle;
+        c.lineWidth = this.lineWidth;
         c.fill();
         c.stroke();
 
@@ -50,10 +45,8 @@ class Circle{
 circleArray = []
 
 function createCircles(){
-    var circle1 = new Circle(radius, 'gray', '#7D6B7D');
-    var circle2 = new Circle(radius2, 'gray', '#978897');
-
-    circleArray.push(circle1);
+    var circle2 = new Circle(radius2, 'white', '#f4f4f5', 30);
+    
     circleArray.push(circle2);
 
 }
@@ -65,10 +58,11 @@ function drawTimeStamps(){
     var endingAngle = 360
     for (let angle = startingAngle; angle <= endingAngle; angle += 30){
         c.beginPath();
-        fontSize = 13
+        fontSize = 20
         c.font = `bold ${fontSize}px Arial`
-        c.fillStyle = "#7D6B7D";
-        c.fillText(timeStamp,(x + Math.sin((Math.PI/180)*angle) * (radius2-12))-4, (y - Math.cos((Math.PI/180)*angle) * (radius2-12))+4);
+        c.shadowBlur = 0;
+        c.fillStyle = "#3b3b3b";
+        c.fillText(timeStamp,(x + Math.sin((Math.PI/180)*angle) * (radius2-35))-4, (y - Math.cos((Math.PI/180)*angle) * (radius2-35))+4);
         timeStamp += 1;
     }
 }
@@ -87,25 +81,25 @@ function displayTime(){
     // 1 second
     c.beginPath();
     c.moveTo(x,y);
-    c.strokeStyle = '#7D6B7D';
+    c.strokeStyle = 'red';
     c.lineWidth = 2;
-    c.lineTo((x + Math.sin((Math.PI/180)*6*time().seconds) * (radius2-20)), (y - Math.cos((Math.PI/180)*6*time().seconds) * (radius2-20)))
+    c.lineTo((x + Math.sin((Math.PI/180)*6*time().seconds) * (radius2-35)), (y - Math.cos((Math.PI/180)*6*time().seconds) * (radius2-35)))
     c.stroke();
 
         //1 minute
     c.beginPath();
     c.moveTo(x,y);
-    c.strokeStyle = '#7D6B7D';
+    c.strokeStyle = 'black';
     c.lineWidth = 4;
-    c.lineTo((x + Math.sin((Math.PI/180)*6*time().minutes) * (radius2-30)), (y - Math.cos((Math.PI/180)*6*time().minutes) * (radius2-30)))
+    c.lineTo((x + Math.sin((Math.PI/180)*6*time().minutes) * (radius2-45)), (y - Math.cos((Math.PI/180)*6*time().minutes) * (radius2-45)))
     c.stroke();
 
     //1 hour
     c.beginPath();
     c.moveTo(x,y);
     c.lineWidth = 8;
-    c.strokeStyle = '#7D6B7D';
-    c.lineTo((x + Math.sin((Math.PI/180)*30*time().hours) * (radius2-35)), (y - Math.cos((Math.PI/180)*30*time().hours) * (radius2-35)))
+    c.strokeStyle = 'white';
+    c.lineTo((x + Math.sin((Math.PI/180)*30*time().hours) * (radius2-50)), (y - Math.cos((Math.PI/180)*30*time().hours) * (radius2-50)))
     c.stroke();
 }
 
@@ -125,7 +119,7 @@ function displayTimes(){
     }
     drawTimeStamps();
     displayTime();
-    var circle3 = new Circle(4, 'gray', '#7D6B7D');
+    var circle3 = new Circle(10, 'gray', '#7D6B7D',0);
     circle3.draw();
 }
 
