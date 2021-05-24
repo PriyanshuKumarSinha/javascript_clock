@@ -98,7 +98,7 @@ function displayTime(){
     c.beginPath();
     c.moveTo(x,y);
     c.lineWidth = 8;
-    c.strokeStyle = '#C8C8C8';
+    c.strokeStyle = '#DCDCDC';
     c.lineTo((x + Math.sin((Math.PI/180)*30*time().hours) * (radius2-50)), (y - Math.cos((Math.PI/180)*30*time().hours) * (radius2-50)))
     c.stroke();
 }
