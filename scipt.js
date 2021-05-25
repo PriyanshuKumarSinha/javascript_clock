@@ -40,7 +40,7 @@ function displayTime(){
     c.beginPath();
     c.moveTo(x,y);
     c.lineWidth = 8;
-    c.strokeStyle = '#A9A9A9';
+    c.strokeStyle = '#B8B8B8';
     c.lineTo((x + Math.sin((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-50)), (y - Math.cos((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-50)))
     c.stroke();
 }
