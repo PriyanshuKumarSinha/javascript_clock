@@ -99,13 +99,12 @@ function displayTime(){
     c.moveTo(x,y);
     c.lineWidth = 8;
     c.strokeStyle = '#DCDCDC';
-    c.lineTo((x + Math.sin((Math.PI/180)*30*time().hours) * (radius2-50)), (y - Math.cos((Math.PI/180)*30*time().hours) * (radius2-50)))
+    c.lineTo((x + Math.sin((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-50)), (y - Math.cos((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-50)))
     c.stroke();
 }
 
 
 
-createCircles();
 // drawTimeStamps();
 // displayTime();
 // drawCircles();
@@ -122,6 +121,7 @@ function displayTimes(){
     var circle3 = new Circle(10, 'gray', '#7D6B7D',0);
     circle3.draw();
 }
+createCircles();
 
 displayTimes();
 
