@@ -20,29 +20,36 @@ window.addEventListener('resize',
 )
 
 function displayTime(){
-    // 1 second
-    c.beginPath();
-    c.moveTo(x,y);
-    c.strokeStyle = 'red';
-    c.lineWidth = 2;
-    c.lineTo((x + Math.sin((Math.PI/180)*6*time().seconds) * (radius2-35)), (y - Math.cos((Math.PI/180)*6*time().seconds) * (radius2-35)))
-    c.stroke();
-
         //1 minute
     c.beginPath();
     c.moveTo(x,y);
-    c.strokeStyle = 'black';
+    c.strokeStyle = '#C8C8C8';
     c.lineWidth = 4;
-    c.lineTo((x + Math.sin((Math.PI/180)*6*time().minutes) * (radius2-45)), (y - Math.cos((Math.PI/180)*6*time().minutes) * (radius2-45)))
+    c.lineTo((x + Math.sin((Math.PI/180)*6*time().minutes) * (radius2-60)), (y - Math.cos((Math.PI/180)*6*time().minutes) * (radius2-60)))
     c.stroke();
 
     //1 hour
     c.beginPath();
     c.moveTo(x,y);
     c.lineWidth = 8;
-    c.strokeStyle = '#B8B8B8';
-    c.lineTo((x + Math.sin((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-50)), (y - Math.cos((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-50)))
+    c.strokeStyle = '#909090';
+    c.lineTo((x + Math.sin((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-70)), (y - Math.cos((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-70)))
     c.stroke();
+        // 1 second
+        c.beginPath();
+        c.moveTo(x,y);
+        c.strokeStyle = '#ff0038';
+        c.lineWidth = 2;
+        c.lineTo((x + Math.sin((Math.PI/180)*6*time().seconds) * (radius2-120)), (y - Math.cos((Math.PI/180)*6*time().seconds) * (radius2-120)))
+        c.stroke();
+    
+        // 1 second
+        c.beginPath();
+        c.moveTo(x,y);
+        c.strokeStyle = '#ff0038';
+        c.lineWidth = 2;
+        c.lineTo((x - Math.sin((Math.PI/180)*6*time().seconds) * (radius2-40)), (y + Math.cos((Math.PI/180)*6*time().seconds) * (radius2-40)))
+        c.stroke();
 }
 
 class Circle{
@@ -56,7 +63,7 @@ class Circle{
     draw(ctx){
         ctx.beginPath();
         ctx.arc(x, y, this.radius, 0, Math.PI*2, false);
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = this.stroke;
         ctx.shadowColor = "#3b3b3b";
         ctx.fillStyle = this.fill;
         ctx.fill();
@@ -65,8 +72,8 @@ class Circle{
     }
 }
 
-var circle2 = new Circle(radius2, 'white', '#f4f4f5', 30);
-var circle3 = new Circle(10, undefined , '#7D6B7D',0);
+var circle2 = new Circle(radius2, 10, '#f4f4f5', 30);
+var circle3 = new Circle(8, 0.5, 'black',0);
 
 
 
@@ -109,7 +116,7 @@ function displayTimes(){
 
     drawTimeStamps();
     displayTime();
-    c.strokeStyle = '#E0E0E0'
+    c.strokeStyle = '#f4f4f5'
     c.lineWidth = 0;
 
     circle3.draw(c);
