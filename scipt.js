@@ -3,8 +3,6 @@ canvas.width = window.innerWidth ;
 canvas.height = window.innerHeight;
 var c = canvas.getContext('2d');
 
-
-
 var radius = canvas.height/4;
 var radius2 = radius -25;
     
@@ -21,35 +19,55 @@ window.addEventListener('resize',
     }
 )
 
+function displayTime(){
+    // 1 second
+    c.beginPath();
+    c.moveTo(x,y);
+    c.strokeStyle = 'red';
+    c.lineWidth = 2;
+    c.lineTo((x + Math.sin((Math.PI/180)*6*time().seconds) * (radius2-35)), (y - Math.cos((Math.PI/180)*6*time().seconds) * (radius2-35)))
+    c.stroke();
+
+        //1 minute
+    c.beginPath();
+    c.moveTo(x,y);
+    c.strokeStyle = 'black';
+    c.lineWidth = 4;
+    c.lineTo((x + Math.sin((Math.PI/180)*6*time().minutes) * (radius2-45)), (y - Math.cos((Math.PI/180)*6*time().minutes) * (radius2-45)))
+    c.stroke();
+
+    //1 hour
+    c.beginPath();
+    c.moveTo(x,y);
+    c.lineWidth = 8;
+    c.strokeStyle = '#A9A9A9';
+    c.lineTo((x + Math.sin((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-50)), (y - Math.cos((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-50)))
+    c.stroke();
+}
+
 class Circle{
-    constructor(radius2, strokeStyles, fillStyles, lineWidth){
-        this.radius = radius2;
-        this.strokeStyle = strokeStyles;
-        this.fillStyle = fillStyles;
-        this.lineWidth = lineWidth;
+    constructor(radius, stroke, fill, width){
+        this.radius = radius;
+        this.width = width;
+        this.fill = fill;
+        this.stroke = stroke;
 
     }
-    draw(){
-        c.beginPath();
-        c.arc(x, y, this.radius, 0, Math.PI*2, false);
-        c.shadowBlur = 10;
-        c.shadowColor = "#3b3b3b";
-        c.fillStyle = this.fillStyle;
-        c.lineWidth = this.lineWidth;
-        c.fill();
-        c.stroke();
+    draw(ctx){
+        ctx.beginPath();
+        ctx.arc(x, y, this.radius, 0, Math.PI*2, false);
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = "#3b3b3b";
+        ctx.fillStyle = this.fill;
+        ctx.fill();
+        ctx.stroke();
 
     }
 }
 
-circleArray = []
+var circle2 = new Circle(radius2, 'white', '#f4f4f5', 30);
+var circle3 = new Circle(10, undefined , '#7D6B7D',0);
 
-function createCircles(){
-    var circle2 = new Circle(radius2, 'white', '#f4f4f5', 30);
-    
-    circleArray.push(circle2);
-
-}
 
 
 function drawTimeStamps(){
@@ -77,51 +95,25 @@ function time(){
     return time
 }
 
-function displayTime(){
-    // 1 second
-    c.beginPath();
-    c.moveTo(x,y);
-    c.strokeStyle = 'red';
-    c.lineWidth = 2;
-    c.lineTo((x + Math.sin((Math.PI/180)*6*time().seconds) * (radius2-35)), (y - Math.cos((Math.PI/180)*6*time().seconds) * (radius2-35)))
-    c.stroke();
-
-        //1 minute
-    c.beginPath();
-    c.moveTo(x,y);
-    c.strokeStyle = 'black';
-    c.lineWidth = 4;
-    c.lineTo((x + Math.sin((Math.PI/180)*6*time().minutes) * (radius2-45)), (y - Math.cos((Math.PI/180)*6*time().minutes) * (radius2-45)))
-    c.stroke();
-
-    //1 hour
-    c.beginPath();
-    c.moveTo(x,y);
-    c.lineWidth = 8;
-    c.strokeStyle = '#DCDCDC';
-    c.lineTo((x + Math.sin((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-50)), (y - Math.cos((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-50)))
-    c.stroke();
-}
+var ctx = canvas.getContext('2d')
 
 
-
-// drawTimeStamps();
-// displayTime();
-// drawCircles();
 
 
 function displayTimes(){
     requestAnimationFrame(displayTimes);
     c.clearRect(0,0,innerWidth, innerHeight)
-    for (let i = 0; i < circleArray.length; i++){
-        circleArray[i].draw();
-    }
+    ctx.strokeStyle = '#E0E0E0'
+    ctx.lineWidth = 30;
+    circle2.draw(ctx);
+
     drawTimeStamps();
     displayTime();
-    var circle3 = new Circle(10, 'gray', '#7D6B7D',0);
-    circle3.draw();
+    c.strokeStyle = '#E0E0E0'
+    c.lineWidth = 0;
+
+    circle3.draw(c);
 }
-createCircles();
 
 displayTimes();
 
