@@ -33,7 +33,7 @@ function displayTime(){
     c.moveTo(x,y);
     c.lineWidth = 8;
     c.strokeStyle = '#909090';
-    c.lineTo((x + Math.sin((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-70)), (y - Math.cos((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-70)))
+    c.lineTo((x + Math.sin((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-60)), (y - Math.cos((Math.PI/180)*(30*(time().hours + (time().minutes)/60))) * (radius2-60)))
     c.stroke();
         // 1 second
         c.beginPath();
@@ -109,8 +109,8 @@ var ctx = canvas.getContext('2d')
 
 function displayTimes(){
     requestAnimationFrame(displayTimes);
-    c.clearRect(0,0,innerWidth, innerHeight)
-    ctx.strokeStyle = '#E0E0E0'
+    c.clearRect(0,0,innerWidth, innerHeight);
+    ctx.strokeStyle = '#E0E0E0';
     ctx.lineWidth = 30;
     circle2.draw(ctx);
 
