@@ -6,7 +6,7 @@ Hosted here :- https://javasriptclock.netlify.app/
 **Screenshot** :-
 
 <img src ="https://github.com/PriyanshuKumarSinha/javascript_clock/blob/main/project_screenshot_desktop.png"></img>
-<img width = "260px" src ="https://github.com/PriyanshuKumarSinha/javascript_clock/blob/main/project_screenshot_mobile.jpg"></img>
+<img width = "320px" src ="https://github.com/PriyanshuKumarSinha/javascript_clock/blob/main/project_screenshot_mobile.jpg"></img>
 
 
 ## Developed With
