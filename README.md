@@ -13,6 +13,10 @@ Hosted here :- https://javasriptclock.netlify.app/
 - Canvas - to draw clock and hands to display time
 - Date object - to get current time
 
-## Thank you for your time 
+All suggestions and feedback are welcome!😃
+(please update it on feedback.md, Thank you!)
+
 ## Author 
 Priyanshu Kumar Sinha
+
+### Thank you for your time reading this
